@@ -1,4 +1,4 @@
-# sitemap-reader
+# sitemap_reader
 
 Ruby library for reading sitemaps
 
@@ -6,7 +6,7 @@ Ruby library for reading sitemaps
 
 Add this line to your application's Gemfile:
 
-    gem 'sitemap-reader'
+    gem 'sitemap_reader'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sitemap-reader
+    $ gem install sitemap_reader
 
 ## Usage
 
