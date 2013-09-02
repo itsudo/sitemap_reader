@@ -36,6 +36,12 @@ will return list of ruby hashes representing urls
       }
     ]
 
+## TODO
+  
+  * optimize code for large sitemaps
+  * read sitemapindexes
+  * create benchmark tests
+
 ## Contributing
 
 1. Fork it
