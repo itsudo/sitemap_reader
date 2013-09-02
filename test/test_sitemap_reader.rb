@@ -5,7 +5,7 @@ class SitemapReaderTest < Test::Unit::TestCase
   def test_get_urls
      sr = SitemapReader.new(File.dirname(__FILE__) + '/assets/sitemap.xml')
 
-     assert_includes sr.get_urls, {loc: 'http://example.com/page2', lastmod: nil}
-     assert_includes sr.get_urls, {loc: 'http://example.com/page1', lastmod: '2013-08-18'}
+     assert_includes sr.get_urls, {loc: 'http://example.com/page2', lastmod: nil, changefreq: nil, priority: nil}
+     assert_includes sr.get_urls, {loc: 'http://example.com/page1', lastmod: '2013-08-18', changefreq: 'monthly', priority: 0.8}
   end
 end

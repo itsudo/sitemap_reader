@@ -21,8 +21,10 @@ class SitemapReader
 	def get_urls
 		@doc.css('url').map do |u|
 			loc = u.css('loc').first.content
-			lastmod = u.css('lastmod').first.content unless u.css('lastmod').first.nil?
-			{loc: loc, lastmod: lastmod}
+      lastmod = u.css('lastmod').first.content unless u.css('lastmod').first.nil?
+      changefreq = u.css('changefreq').first.content unless u.css('changefreq').first.nil?
+      priority = url_priority(u.css('priority').first)
+			{loc: loc, lastmod: lastmod, changefreq: changefreq, priority: priority}
 		end
 	end
 
@@ -35,5 +37,9 @@ class SitemapReader
       require 'open-uri'
       open(file_or_url)
     end
+  end
+
+  def url_priority(priority)
+    priority.content.to_f unless priority.nil?
   end
 end
