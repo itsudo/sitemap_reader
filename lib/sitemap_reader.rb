@@ -21,7 +21,7 @@ class SitemapReader
 	def get_urls
 		@doc.css('url').map do |u|
 			loc = u.css('loc').first.content
-      lastmod = u.css('lastmod').first.content unless u.css('lastmod').first.nil?
+      lastmod = url_lastmod(u.css('lastmod').first)
       changefreq = u.css('changefreq').first.content unless u.css('changefreq').first.nil?
       priority = url_priority(u.css('priority').first)
 			{loc: loc, lastmod: lastmod, changefreq: changefreq, priority: priority}
@@ -41,5 +41,15 @@ class SitemapReader
 
   def url_priority(priority)
     priority.content.to_f unless priority.nil?
+  end
+
+  def url_lastmod(lastmod)
+    begin
+      if ! lastmod.nil?
+        date_arr = lastmod.content.scan(/\d+/).map(&:to_i)
+        Time.new(*date_arr).utc unless date_arr.length == 0
+      end
+    rescue ArgumentError
+    end
   end
 end
