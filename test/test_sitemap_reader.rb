@@ -1,8 +1,13 @@
-require 'test/unit'
+require 'minitest/spec'
+require 'minitest/autorun'
 require 'sitemap_reader'
 
-class SitemapReaderTest < Test::Unit::TestCase
-  def test_get_urls
+describe SitemapReader do
+  it "can be created with local file as an argument" do
+    SitemapReader.new(File.dirname(__FILE__) + '/assets/sitemap.xml').must_be_instance_of SitemapReader
+  end
+
+  it "returns parsed sitemap" do
      sr = SitemapReader.new(File.dirname(__FILE__) + '/assets/sitemap.xml')
 
      assert_includes sr.get_urls, {loc: 'http://example.com/page2', lastmod: nil, changefreq: nil, priority: nil}
