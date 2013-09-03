@@ -1,6 +1,6 @@
 # sitemap_reader
 
-[![Build Status](https://travis-ci.org/itsudo/sitemap-reader.png)](https://travis-ci.org/itsudo/sitemap-reader)
+[![Build Status](https://travis-ci.org/itsudo/sitemap_reader.png)](https://travis-ci.org/itsudo/sitemap_reader)
 
 Ruby library for reading sitemaps
 
