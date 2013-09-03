@@ -28,13 +28,19 @@ will return list of ruby hashes representing urls
     [
       {
         :loc=>"http://example.com/page1",
-        :lastmod=>"2013-08-18"
+        :lastmod=>"2013-08-17 23:00:00",
+        :changefreq=>'monthly',
+        :priority=>0.8
       },
       {
         :loc=>"http://example.com/page2",
-        :lastmod=>nil
+        :lastmod=>nil,
+        :changefreq=>nil,
+        :priority=>nil
       }
     ]
+
+The `loc` attribute of the url in the sitemap cannot be empty, but the rest can be nil if not set or can't be parsed.
 
 ## TODO
   

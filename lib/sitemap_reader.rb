@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'w3c_datetime'
 
 # Parse sitemap
 #
@@ -15,20 +16,18 @@ class SitemapReader
   #   file_or_url: (String)
 	def initialize(file_or_url)
 		@doc = Nokogiri::XML(get_sitemap(file_or_url))
-		@urls= get_urls
 	end
 
 	def get_urls
 		@doc.css('url').map do |u|
-			loc = u.css('loc').first.content
-      lastmod = url_lastmod(u.css('lastmod').first)
-      changefreq = u.css('changefreq').first.content unless u.css('changefreq').first.nil?
-      priority = url_priority(u.css('priority').first)
-			{loc: loc, lastmod: lastmod, changefreq: changefreq, priority: priority}
+			{
+        loc: u.css('loc').first.content,
+        lastmod: url_lastmod(u.css('lastmod').first),
+        changefreq: url_changefreq(u.css('changefreq').first),
+        priority: url_priority(u.css('priority').first)
+      }
 		end
 	end
-
-  private
 
   def get_sitemap(file_or_url)
     if File.exist?(file_or_url)
@@ -39,16 +38,17 @@ class SitemapReader
     end
   end
 
+  def url_changefreq(changefreq)
+    changefreq.content unless changefreq.nil?
+  end
+
   def url_priority(priority)
     priority.content.to_f unless priority.nil?
   end
 
   def url_lastmod(lastmod)
     begin
-      if ! lastmod.nil?
-        date_arr = lastmod.content.scan(/\d+/).map(&:to_i)
-        Time.new(*date_arr).utc unless date_arr.length == 0
-      end
+      W3cDatetime::parse(lastmod.content) unless lastmod.nil?
     rescue ArgumentError
     end
   end
