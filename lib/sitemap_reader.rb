@@ -29,6 +29,8 @@ class SitemapReader
 		end
 	end
 
+  private
+
   def get_sitemap(file_or_url)
     if File.exist?(file_or_url)
       File.open(file_or_url)
