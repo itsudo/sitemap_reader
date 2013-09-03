@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'sitemap_reader'
-  spec.version     = '0.0.2'
+  spec.version     = '0.0.3'
   spec.summary     = "Ruby library for reading sitemaps"
   spec.authors     = ["Michal Pawlowski"]
   spec.email       = 'misza@misza.co.uk'
@@ -10,6 +10,8 @@ Gem::Specification.new do |spec|
 
   spec.homepage    = 'https://github.com/itsudo/sitemap_reader'
   spec.license     = 'MIT'
+
+  spec.required_ruby_version = '>=1.9.2'
 
   spec.add_dependency "nokogiri"
   spec.add_dependency "w3c_datetime"
